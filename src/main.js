@@ -1,14 +1,27 @@
 import { fetchWeather } from "./api.js";
-import { toHourlyList } from "./format.js";
 import { renderTimetable } from "./render.js";
+import { cities } from "./cities.js";
 
 // 1. fetchWeatherで取得
 // 2. toHourlyListで組み替え
 // 3. renderTimetableで表示
 
-async function main() {
-   const data = await fetchWeather(35.6895, 139.6917); // 東京の緯度経度
-   console.log(data);
+async function showWeather(latitude, longitude) {
+   const data = await fetchWeather(latitude, longitude);
+   renderTimetable(document.getElementById("app"), data.hourly);
 }
 
-main();
+// 都市選択用のオプションを生成
+const citySelect = document.getElementById("city-select");
+
+cities.forEach((city) => {
+   const option = document.createElement("option");
+   option.value = `${city.latitude},${city.longitude}`;
+   option.textContent = city.name;
+   citySelect.appendChild(option);
+});
+
+citySelect.addEventListener("change", () => {
+   const [latitude, longitude] = citySelect.value.split(",").map(Number);
+   showWeather(latitude, longitude);
+});
