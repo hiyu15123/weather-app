@@ -3,8 +3,11 @@ export async function fetchWeather(latitude, longitude) {
       latitude: latitude,
       longitude: longitude,
       hourly: "temperature_2m,precipitation_probability,weather_code",
-      timezone: "Asia/Tokyo",
-      forecast_hours: 24,
+      timezone: "auto",
+      daily: "weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,wind_direction_10m_dominant",
+      current: "temperature_2m",
+      wind_speed_unit: "ms",
+
    });
 
    const response = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`);

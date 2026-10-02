@@ -5,17 +5,29 @@ import { getCurrentLocation } from "./geolocation.js";
 
 const app = document.getElementById("app");
 const status = document.getElementById("status");
+const TIMETABLE_HOURS = 24;
 
 async function showWeather(latitude, longitude, placeName) {
    status.textContent = `天気を取得中です...`;
    try {
       const data = await fetchWeather(latitude, longitude);
-      renderTimetable(app, data.hourly);
+      const now = data.current.time.slice(0,13);
+      const startIndex = data.hourly.time.findIndex((time) => {
+         return time.slice(0, 13) === now;
+      });
+      const end = startIndex + TIMETABLE_HOURS;
+      const timetableHourly = {
+         time: data.hourly.time.slice(startIndex,end),
+         temperature_2m: data.hourly.temperature_2m.slice(startIndex,end),
+         precipitation_probability: data.hourly.precipitation_probability.slice(startIndex, end),
+         weather_code: data.hourly.weather_code.slice(startIndex, end),
+      };
+      renderTimetable(app, timetableHourly);
       status.textContent = `${placeName}の天気`;
    } catch(err) {
       status.textContent = `天気の取得に失敗しました`;
       app.textContent = `時間をおいて再度お試しください`;
-      console.error(err);
+      console.log(err);
    }
 }
 
@@ -50,3 +62,4 @@ locationButton.addEventListener("click", async() => {
 });
 
 showWeather(cities[0].latitude, cities[0].longitude, cities[0].name);
+
