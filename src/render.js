@@ -16,7 +16,7 @@ export function renderTimetable(container, hourly) {
    const weatherCells = hourly.weather_code
       .map((code) => {
          const { label, icon } = getWeatherInfo(code);
-         return `<td>${icon} ${label}</td>`;
+         return `<td><span area-hidden="true">${icon}</span> ${label}</td>`;
       })
       .join("");
    
@@ -43,5 +43,6 @@ export function renderTimetable(container, hourly) {
             </tr>
          </tbody>
       </table>
+      <caption>1時間ごとの天気</caption>
    `;
 }
