@@ -1,5 +1,5 @@
 import { fetchWeather } from "./api.js";
-import { renderTimetable } from "./render.js";
+import { renderTimetable, renderDayCards } from "./render.js";
 import { cities } from "./cities.js";
 import { getCurrentLocation } from "./geolocation.js";
 
@@ -11,20 +11,25 @@ async function showWeather(latitude, longitude, placeName) {
    status.textContent = `天気を取得中です...`;
    try {
       const data = await fetchWeather(latitude, longitude);
-      const now = data.current.time.slice(0,13);
+      const now = data.current.time.slice(0, 13);
       const startIndex = data.hourly.time.findIndex((time) => {
          return time.slice(0, 13) === now;
       });
       const end = startIndex + TIMETABLE_HOURS;
       const timetableHourly = {
-         time: data.hourly.time.slice(startIndex,end),
-         temperature_2m: data.hourly.temperature_2m.slice(startIndex,end),
-         precipitation_probability: data.hourly.precipitation_probability.slice(startIndex, end),
+         time: data.hourly.time.slice(startIndex, end),
+         temperature_2m: data.hourly.temperature_2m.slice(startIndex, end),
+         precipitation_probability: data.hourly.precipitation_probability.slice(
+            startIndex,
+            end,
+         ),
          weather_code: data.hourly.weather_code.slice(startIndex, end),
       };
+      const dayCards = document.getElementById("day-cards");
+      renderDayCards(dayCards);
       renderTimetable(app, timetableHourly);
       status.textContent = `${placeName}の天気`;
-   } catch(err) {
+   } catch (err) {
       status.textContent = `天気の取得に失敗しました`;
       app.textContent = `時間をおいて再度お試しください`;
       console.log(err);
@@ -49,7 +54,7 @@ citySelect.addEventListener("change", () => {
 
 const locationButton = document.getElementById("current-location");
 
-locationButton.addEventListener("click", async() => {
+locationButton.addEventListener("click", async () => {
    status.textContent = `現在地を取得中...`;
    try {
       const { latitude, longitude } = await getCurrentLocation();
@@ -62,4 +67,3 @@ locationButton.addEventListener("click", async() => {
 });
 
 showWeather(cities[0].latitude, cities[0].longitude, cities[0].name);
-
