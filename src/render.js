@@ -43,6 +43,6 @@ export function renderTimetable(container, hourly) {
             </tr>
          </tbody>
       </table>
-      <caption>1時間ごとの天気</caption>
+      <caption>1時間ごとの天気を表示しています</caption>
    `;
 }
