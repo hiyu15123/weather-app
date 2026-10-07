@@ -4,7 +4,7 @@ export async function fetchWeather(latitude, longitude) {
       longitude: longitude,
       hourly: "temperature_2m,precipitation_probability,weather_code",
       timezone: "auto",
-      daily: "weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,wind_direction_10m_dominant",
+      daily: "weather_code,temperature_2m_max,temperature_2m_min",
       current: "temperature_2m",
       wind_speed_unit: "ms",
    });

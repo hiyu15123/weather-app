@@ -12,23 +12,26 @@
          <div class="controls">
             <label for="city-select">都市を選択</label>
             <select id="city-select"></select>
+            <button type="button" id="current-location">現在地の天気</button>
          </div>
-         <button type="button" id="current-location">現在地の天気</button>
 
-         <p id="status" aria-live="polite"></p>
+         <h2 id="status" aria-live="polite"></h2>
 
          <section class="today-tomorrow" aria-labelledby="tt-heading">
-            <h2 id="tt-heading">今日明日の天気</h2>
+            <h3 id="tt-heading">今日・明日</h3>
             <div id="day-cards" class="day-cards"></div>
-            
          </section>
-         <div
-            id="app"
-            tabindex="0"
-            role="region"
-            aria-labelledby="status"
-         ></div>
-         <p class="scroll-hint">← 横にスクロールできます →</p>
+
+         <section class="hourly" aria-labelledby="hourly-heading">
+            <h3 id="hourly-heading">1時間ごと</h3>
+            <div
+               id="app"
+               tabindex="0"
+               role="region"
+               aria-labelledby="hourly-heading"
+            ></div>
+            <p class="scroll-hint">← 横にスクロールできます →</p>
+         </section>
       </main>
       <footer>
          <p>

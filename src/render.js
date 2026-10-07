@@ -23,10 +23,10 @@ export function renderTimetable(container, hourly) {
 
    container.innerHTML = `
       <table>
-         <caption>1時間ごとの天気を表示しています</caption>
+         <caption class="visually-hidden">1時間ごとの天気</caption>
          <thead>
             <tr>
-               <th scope="col">時間</th>
+               <th scope="row">時間</th>
                ${timeCells}
             </tr>
          </thead>
@@ -48,6 +48,10 @@ export function renderTimetable(container, hourly) {
    `;
 }
 
+function roundToTen(value) {
+   return Math.round(value / 10) * 10;
+}
+
 function createDayCard(daily, index, hourly) {
    const date = daily.time[index];
    const d = new Date(`${date}T00:00`);
@@ -66,13 +70,13 @@ function createDayCard(daily, index, hourly) {
             start,
             start + 6,
          );
-         return `<td>${Math.max(...values)}%</td>`;
+         return `<td>${roundToTen(Math.max(...values))}%</td>`;
       })
       .join("");
 
    return `
       <article class="day-card">
-         <h3>${month}月${day}日（${weekday}）</h3>
+         <h4>${month}月${day}日（${weekday}）</h4>
          <div class="day-card__summary">
             <span class="day-card__icon" aria-hidden="true">${icon}</span>
             <p class="day-card__weather">${label}</p>
@@ -97,7 +101,6 @@ function createDayCard(daily, index, hourly) {
                ${rainCells}
             </tr>
          </table>
-         <p class="day-card__wind">風：北東 最大4m/s</p>
       </article>
    `;
 }
