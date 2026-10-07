@@ -1,32 +1,41 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>天気予報アプリ</title>
-   <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-   <main>
-      <h1>天気予報</h1>
-      <div class="controls">
-         <label for="city-select">都市を選択</label>
-         <select id="city-select"></select>
-      </div>
-      <button type="button" id="current-location">現在地の天気</button>
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>天気予報アプリ</title>
+      <link rel="stylesheet" href="css/style.css" />
+   </head>
+   <body>
+      <main>
+         <h1>天気予報</h1>
+         <div class="controls">
+            <label for="city-select">都市を選択</label>
+            <select id="city-select"></select>
+         </div>
+         <button type="button" id="current-location">現在地の天気</button>
 
-      <p id="status" aria-live="polite"></p>
+         <p id="status" aria-live="polite"></p>
 
-      <section class="today-tomorrow" aria-labelledby="tt-heading">
-         <h2 id="tt-heading">今日明日の天気</h2>
-         <div id="day-cards" class="day-cards"></div>
-      </section>
-      <div id="app" tabindex="0" role="region" aria-labelledby="status"></div>
-      <p class="scroll-hint">← 横にスクロールできます →</p>
-   </main>
-   <footer>
-      <p>天気データ：<a href="https://open-meteo.com/">Open-Meteo</a>（CC BY 4.0）</p>
-   </footer>
-   <script type="module" src="src/main.js"></script>
-</body>
+         <section class="today-tomorrow" aria-labelledby="tt-heading">
+            <h2 id="tt-heading">今日明日の天気</h2>
+            <div id="day-cards" class="day-cards"></div>
+            
+         </section>
+         <div
+            id="app"
+            tabindex="0"
+            role="region"
+            aria-labelledby="status"
+         ></div>
+         <p class="scroll-hint">← 横にスクロールできます →</p>
+      </main>
+      <footer>
+         <p>
+            天気データ：<a href="https://open-meteo.com/">Open-Meteo</a>（CC BY
+            4.0）
+         </p>
+      </footer>
+      <script type="module" src="src/main.js"></script>
+   </body>
 </html>

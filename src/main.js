@@ -26,7 +26,7 @@ async function showWeather(latitude, longitude, placeName) {
          weather_code: data.hourly.weather_code.slice(startIndex, end),
       };
       const dayCards = document.getElementById("day-cards");
-      renderDayCards(dayCards);
+      renderDayCards(dayCards, data.daily, data.hourly);
       renderTimetable(app, timetableHourly);
       status.textContent = `${placeName}の天気`;
    } catch (err) {
